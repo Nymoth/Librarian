@@ -1,0 +1,23 @@
+{
+  "name": "books",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "emotion": "^6.0.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "react-app-rewire-emotion": "^0.1.1",
+    "react-app-rewired": "^1.1.0",
+    "react-scripts": "^1.0.10"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom"
+  }
+}
