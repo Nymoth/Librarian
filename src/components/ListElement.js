@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'emotion/react';
 
 const BookWrapper = styled('div')`
@@ -17,13 +18,18 @@ const BookWrapper = styled('div')`
   }
 `
 
-const Book = book => (
+const ListElement = ({ title, subtitle }) => (
   <BookWrapper>
     <div>
-      <div className="title">{book.title}</div>
-      <p className="subtitle">{book.author} - {book.date}</p>
+      <div className="title">{title}</div>
+      <p className="subtitle">{subtitle}</p>
     </div>
   </BookWrapper>
 );
 
-export default Book;
+ListElement.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string
+};
+
+export default ListElement;

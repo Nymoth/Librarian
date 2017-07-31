@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import * as ActionTypes from '../actions';
 
 const getBooks = (state = {
@@ -29,6 +28,16 @@ const getBooks = (state = {
   }
 }
 
+// const getBook = (state = {}, action) => {
+//   switch (action.type) {
+//     case ActionTypes.GET_BOOK:
+//       return {
+//         ...state,
+//         book:
+//       }
+//   }
+// }
+
 const sortBooks = (state = {}, action) => {
   switch (action.types) {
     case ActionTypes.SORT_BOOKS:
@@ -51,10 +60,10 @@ const filterBooks = (state = {}, action) => {
   }
 }
 
-const rootReducer = combineReducers({
+const reducers = {
   getBooks,
   sortBooks,
   filterBooks
-});
+};
 
-export default rootReducer;
+export default reducers;
