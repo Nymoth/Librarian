@@ -42,10 +42,15 @@ class Book extends Component {
   }
 
   submitForm = (book, edit, newBook) => {
-    if (newBook) {
-      this.createBook(edit);
-    } else {
-      this.editBook(book, edit);
+    const valid = Object.keys(edit)
+      .map(k => edit[k] !== '')
+      .reduce((a, b) => a && b);
+    if (valid) {
+      if (newBook) {
+        this.createBook(edit);
+      } else {
+        this.editBook(book, edit);
+      }
     }
   }
 
@@ -110,19 +115,19 @@ class Book extends Component {
             }
           </NavigationWrapper>
           <DataField>
-            <EditableField changeWhen={book.editing} title="Title" value={book.title}>
+            <EditableField changeWhen={book.editing} title="Title" value={book.title || ''}>
               <Input model="title" defaultValue={book.title}  placeholder="Title of the book" />
             </EditableField>
-            <EditableField changeWhen={book.editing} title="ISBN" value={book.ISBN}>
+            <EditableField changeWhen={book.editing} title="ISBN" value={book.ISBN || ''}>
               <Input model="ISBN"  defaultValue={book.ISBN} pattern="\d{3}-\d-\d{3}-\d{5}-\d" placeholder="XXX-X-XXX-XXXXX-X" />
             </EditableField>
-            <EditableField changeWhen={book.editing} title="Author" value={book.author}>
+            <EditableField changeWhen={book.editing} title="Author" value={book.author || ''}>
               <Input model="author" defaultValue={book.author} placeholder="Author of the book" />
             </EditableField>
-            <EditableField changeWhen={book.editing} title="Date" value={formatDate(book.date)}>
+            <EditableField changeWhen={book.editing} title="Date" value={formatDate(book.date) || ''}>
               <InputDate model="date" defaultValue={book.date} />
             </EditableField>
-            <EditableField changeWhen={book.editing} title="Genre" value={book.genre}>
+            <EditableField changeWhen={book.editing} title="Genre" value={book.genre || ''}>
               <Select model="genre" defaultValue={book.genre}>
                 <option value="">Book genre</option>
                 {genres.map((genre, i) => <option value={genre} key={`genre-${i}`}>{genre}</option>)}

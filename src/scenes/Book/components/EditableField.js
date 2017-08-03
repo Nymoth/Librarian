@@ -10,7 +10,7 @@ const EditableField = ({
   children
 }) => (
   <label>
-    <FieldLabel>Title</FieldLabel>
+    <FieldLabel>{title}</FieldLabel>
     <Field>{changeWhen ? children : value}</Field>
   </label>
 );
