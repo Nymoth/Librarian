@@ -11,7 +11,7 @@ import { ThemeProvider } from 'emotion/react/theming';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 import theme from './styles/theme';
-import App from './containers/App';
+import App from './App';
 
 const history = createHistory();
 const store = createStore(

@@ -4,8 +4,6 @@ import styled from 'emotion/react';
 
 const ButtonWrapper = styled('button')`
   display: inline-block;
-  height: 2.5em;
-  line-height: 2.5em;
   text-align: center;
   border: none;
   border-radius: 3px;
@@ -13,6 +11,8 @@ const ButtonWrapper = styled('button')`
   color: ${props =>  props.theme.primary};
   opacity: .8;
   transition: opacity .2s;
+  padding: .5em 1em;
+  font-family: ${props => props.theme.mainFont};
 
   &:hover {
     opacity: 1;
@@ -32,33 +32,34 @@ const ButtonWrapper = styled('button')`
     background-color: ${props => props.theme.error};
     color: ${props => props.theme.background};
   }
-
-  &.icon {
-    border-radius: 100em;
-    width: 2.5em;
-  }
 `
 
 const Button = ({
   primary = false,
   secondary = false,
   error = false,
-  icon = false,
+  action = () => {},
+  submit = false,
   children
-}) => (
-  <ButtonWrapper className={
-    [primary ? 'primary' :
-    secondary ? 'secondary' :
-    error ? 'error' : '',
-    icon ? 'icon' : ''].join(' ')
-  }>{children}</ButtonWrapper>
-);
+}) => {
+  const attrs = {
+    onClick: action,
+    type: submit ? 'submit' : 'button',
+    className: 
+      primary ? 'primary' :
+      secondary ? 'secondary' :
+      error ? 'error' : ''
+  }
+
+  return <ButtonWrapper { ...attrs }>{children}</ButtonWrapper>
+}
 
 Button.propTypes = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   error: PropTypes.bool,
-  round: PropTypes.bool
+  submit: PropTypes.bool,
+  action: PropTypes.func
 }
 
 export default Button;

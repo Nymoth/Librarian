@@ -1,250 +1,36 @@
 import config from '../config';
 
-export const BOOKS_REQUEST = 'BOOKS_REQUEST';
-export const BOOKS_SUCCESS = 'BOOKS_SUCCESS';
-export const BOOKS_FAILURE = 'BOOKS_FAILURE';
+// -- items --
 
-export const booksRequest = () => ({
-  type: BOOKS_REQUEST
+export const API_REQUEST = 'API_REQUEST';
+export const API_SUCCESS = 'API_SUCCESS';
+export const API_FAILURE = 'API_FAILURE';
+
+export const apiRequest = () => ({
+  type: API_REQUEST
 });
 
-export const booksSuccess = json => ({
-  type: BOOKS_SUCCESS,
-  books: json.books
+export const apiSuccess = items => ({
+  type: API_SUCCESS,
+  items
 });
 
-export const booksFailure = error => ({
-  type: BOOKS_FAILURE,
+export const apiFailure = error => ({
+  type: API_FAILURE,
   error
 });
 
-const mock = {
-	"books": [
-		{
-			"title": "Cien años de soledad",
-			"date": "1967-01-12",
-			"author": "Gabriel García Márquez",
-			"ISBN": "978-3-598-21500-1",
-			"genre": "novela",
-			"users": [
-				{
-					"id": 1,
-					"name": "Isidro Pérez"
-				},
-				{
-					"id": 2,
-					"name": "José Manuel Santos"
-				},
-				{
-					"id": 3,
-					"name": "Trinidad Alonso"
-				}
-			]
-		},
-		{
-			"title": "Las Aventuras de Huckleberry Finn",
-			"date": "1998-04-12",
-			"author": "Mark Twain",
-			"ISBN": "978-3-598-21501-8",
-			"genre": "aventura",
-			"users": [
-				{
-					"id": 4,
-					"name": "Jose Miguel Sanchez"
-				},
-				{
-					"id": 5,
-					"name": "Beatriz Reyes"
-				},
-				{
-					"id": 6,
-					"name": "Rosario Garcia"
-				}
-			]
-		},
-		{
-			"title": "El Conde de Montecristo",
-			"date": "1989-01-12",
-			"author": "Alexandre Dumas",
-			"ISBN": "978-3-598-21502-5",
-			"genre": "aventura",
-			"users": [
-				{
-					"id": 6,
-					"name": "Rosario Garcia"
-				},
-				{
-					"id": 1,
-					"name": "Isidro Pérez"
-				},
-				{
-					"id": 4,
-					"name": "Jose Miguel Sanchez"
-				}
-			]
-		},
-		{
-			"title": "El señor de los anillos",
-			"date": "1964-08-25",
-			"author": "John Ronald Reuel Tolkien",
-			"ISBN": "978-3-598-21503-2",
-			"genre": "fantasía",
-			"users": [
-				{
-					"id": 5,
-					"name": "Beatriz Reyes"
-				},
-				{
-					"id": 2,
-					"name": "José Manuel Santos"
-				},
-				{
-					"id": 3,
-					"name": "Trinidad Alonso"
-				}
-			]
-		},
-		{
-			"title": "Drácula",
-			"date": "1986-07-03",
-			"author": "Bram Stoker",
-			"ISBN": "978-3-598-21504-9",
-			"genre": "terror",
-			"users": [
-				{
-					"id": 7,
-					"name": "Vanesa Castro"
-				},
-				{
-					"id": 2,
-					"name": "José Manuel Santos"
-				},
-				{
-					"id": 6,
-					"name": "Rosario Garcia"
-				}
-			]
-		},
-		{
-			"title": "Orgullo y prejuicio",
-			"date": "1966-11-23",
-			"author": "Jane Austen",
-			"ISBN": "978-3-598-21505-6",
-			"genre": "amor",
-			"users": [
-				{
-					"id": 4,
-					"name": "Jose Miguel Sanchez"
-				},
-				{
-					"id": 8,
-					"name": "Julio Navarro"
-				},
-				{
-					"id": 2,
-					"name": "José Manuel Santos"
-				}
-			]
-		},
-		{
-			"title": "El exorcista",
-			"date": "2000-07-05",
-			"author": "Jane Austen",
-			"ISBN": "978-3-598-21506-3",
-			"genre": "terror",
-			"users": [
-				{
-					"id": 1,
-					"name": "Isidro Pérez"
-				},
-				{
-					"id": 2,
-					"name": "José Manuel Santos"
-				},
-				{
-					"id": 7,
-					"name": "Vanesa Castro"
-				}
-			]
-		},
-		{
-			"title": "El resplandor",
-			"date": "1991-05-11",
-			"author": "Stephen King",
-			"ISBN": "978-3-598-21507-0",
-			"genre": "terror",
-			"users": [
-				{
-					"id": 1,
-					"name": "Isidro Pérez"
-				},
-				{
-					"id": 8,
-					"name": "Julio Navarro"
-				},
-				{
-					"id": 3,
-					"name": "Trinidad Alonso"
-				}
-			]
-		},
-		{
-			"title": "Hamlet",
-			"date": "1982-08-01",
-			"author": "William Shakespeare",
-			"ISBN": "978-3-598-21508-7",
-			"genre": "aventura",
-			"users": [
-				{
-					"id": 1,
-					"name": "Isidro Pérez"
-				},
-				{
-					"id": 4,
-					"name": "Jose Miguel Sanchez"
-				},
-				{
-					"id": 3,
-					"name": "Trinidad Alonso"
-				}
-			]
-		},
-		{
-			"title": "El Principito",
-			"date": "1999-07-27",
-			"author": "Antoine de Saint-Exupéry",
-			"ISBN": "978-3-598-21509-4",
-			"genre": "infantil",
-			"users": [
-				{
-					"id": 1,
-					"name": "Isidro Pérez"
-				},
-				{
-					"id": 5,
-					"name": "Beatriz Reyes"
-				},
-				{
-					"id": 2,
-					"name": "José Manuel Santos"
-				}
-			]
-		}
-	]
-};
-
-const fetchBooks = () => dispatch => {
-  dispatch(booksRequest());
-  // return new Promise(resolve =>
-  //   resolve(mock))
+const fetchApi = () => dispatch => {
+  dispatch(apiRequest());
   return fetch(config.BOOKS_URL)
     .then(res => res.json())
-    .then(json => dispatch(booksSuccess(json)))
-    .catch(error => dispatch(booksFailure(error)));
+    .then(items => items.books.map((item, i) => Object.assign({}, item, { editing: false, _id: i, visible: true })))
+    .then(items => dispatch(apiSuccess(items)))
+    .catch(error => dispatch(apiFailure(error)));
 };
 
-const shouldFetchBooks = state => {
-  const { books, loading } = state.getBooks;
+const shouldFetchApi = state => {
+  const { books, loading } = state.getItems;
   if (books.length === 0) {
     return true;
   }
@@ -253,33 +39,96 @@ const shouldFetchBooks = state => {
   }
 }
 
-export const fetchBooksIfNeeded = () => (dispatch, getState) => {
-  if (shouldFetchBooks(getState())) {
-    return dispatch(fetchBooks());
+export const fetchApiIfNeeded = () => (dispatch, getState) => {
+  if (shouldFetchApi(getState())) {
+    return dispatch(fetchApi());
   }
 }
 
-// export const GET_BOOK = 'GET_BOOK';
+export const START_EDITING_BOOK = 'START_EDITING_BOOK';
 
-// export const getBook = isbn => ({
-//   type: GET_BOOK,
-//   isbn
-// });
+export const startEditingBook = (books, book) => {
+  return {
+    type: START_EDITING_BOOK,
+    bookIndex: books.findIndex(b => b._id === book._id),
+    books,
+    book
+  }
+};
+
+export const CANCEL_EDITING_BOOK = 'CANCEL_EDITING_BOOK';
+
+export const cancelEditingBook = (books, book) => ({
+  type: CANCEL_EDITING_BOOK,
+  bookIndex: books.findIndex(b => b._id === book._id),
+  books,
+  book
+});
+
+export const EDIT_BOOK = 'EDIT_BOOK';
+
+export const editBook = (books, book, edit) => ({
+  type: EDIT_BOOK,
+  bookIndex: books.findIndex(b => b._id === book._id),
+  books,
+  book,
+  edit
+});
+
+export const CREATE_BOOK = 'CREATE_BOOK';
+
+export const createBook = (books, book) => ({
+  type: CREATE_BOOK,
+  books,
+  book
+});
+
+// -- layout --
+
+export const TOGGLE_BOOKS_SORT_MENU = 'TOGGLE_BOOKS_SORT_MENU';
+
+export const toggleBooksSortMenu = () => ({
+  type: TOGGLE_BOOKS_SORT_MENU
+});
+
+export const TOGGLE_BOOKS_SEARCH_MENU = 'TOGGLE_BOOKS_SEARCH_MENU';
+
+export const toggleBooksSearchMenu = () => ({
+  type: TOGGLE_BOOKS_SEARCH_MENU
+});
+
+export const SET_BOOKS_SEARCH_FIELD = 'SET_BOOKS_SEARCH_FIELD';
+
+export const setBooksSearchField = field => {
+  return {
+    type: SET_BOOKS_SEARCH_FIELD,
+    field
+  }
+};
+
+export const SET_BOOKS_SEARCH_VALUE = 'SET_BOOKS_SEARCH_VALUE';
+
+export const setBooksSearchValue = value => ({
+  type: SET_BOOKS_SEARCH_VALUE,
+  value
+});
+
+export const RESET_BOOKS_SEARCH = 'RESET_BOOKS_SEARCH';
+
+export const resetBooksSearch = () => ({
+	type: RESET_BOOKS_SEARCH,
+});
 
 export const SORT_BOOKS = 'SORT_BOOKS';
 
-export const sortBooks = (books, field, dir) => ({
+export const sortBooks = (field, dir) => ({
   type: SORT_BOOKS,
-  books,
-  sortField: field,
-  sortDir: dir
+  field,
+  dir
 });
 
-export const FILTER_BOOKS = 'FILTER_BOOKS';
+export const RESET_BOOKS_SORT = 'RESET_BOOKS_SORT';
 
-export const filterBooks = (books, fields, search) => ({
-  type: FILTER_BOOKS,
-  books,
-  filterFields: fields,
-  filterSearch: search
-});
+export const resetBooksSort = () => ({
+	type: RESET_BOOKS_SORT,
+})

@@ -3,6 +3,7 @@ const theme = {
   primary: '#130E3D',
   secondary: '#657ED4',
   error: '#FF331F',
+  borders: '#C1C1C1',
 
   logoFont: '"Megrim", sans-serif',
   titleFont: '"Bellefair", serif',

@@ -5,9 +5,18 @@ import styled from 'emotion/react';
 const BookWrapper = styled('div')`
   margin: .5em;
 
+  &:after {
+    content: '';
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(to left, ${props => props.theme.secondary} , rgba(0,0,0,0));
+    display: block;
+    float: right;
+  }
+
   .title {
-    color: ${props => props.theme.primary};
     font-family: ${props => props.theme.titleFont};
+    color: ${props => props.theme.primary};
     font-size: 1.8em;
     margin: 0;
   }
@@ -15,6 +24,7 @@ const BookWrapper = styled('div')`
   .subtitle {
     color: ${props => props.theme.secondary};
     margin: 0;
+    text-align: right;
   }
 `
 

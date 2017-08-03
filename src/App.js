@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
 
-import Library from './Library';
-import Book from './Book';
-import User from './User';
+import { fetchApiIfNeeded } from './actions';
+
+import Library from './scenes/Library/';
+import Lobby from './scenes/Lobby/';
+import Book from './scenes/Book/';
+import User from './scenes/User/';
 
 const Layout = styled('div')`
   height: 100vh;
@@ -38,14 +41,36 @@ const Header = styled('div')`
   }
 `
 
+const Loading = styled('div')`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+
+  & > .loading-elements {
+    width: 100%;
+  }
+`
+
+const RouterWrapper = styled('div')`
+  padding: .5em;
+`
+
 class App extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
-    error: PropTypes.string
+    dispatch: PropTypes.func.isRequired,
+    error: PropTypes.any,
+    loading: PropTypes.bool.isRequired
+  }
+
+  componentWillMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchApiIfNeeded());
   }
 
   render() {
-    const { history } = this.props;
+    const { history, loading } = this.props;
     return (
       <Layout>
         <Header>
@@ -55,22 +80,33 @@ class App extends Component {
           <div className="header-action"></div>
           <div className="header-action"></div>
         </Header>
-        <HashRouter history={history}>
-          <div>
-            <Route exact={true} path="/" component={Library} />
-            <Route exact={true} path="/book/:isbn" component={Book} />
-            <Route exact={true} path="/user/:id" component={User} />
-          </div>
-        </HashRouter>
+        {loading ? (
+          <Loading>
+            <div className="loading-elements">
+              <img src="/loading.gif" alt="loading" />
+              <p>Loading...</p>
+            </div>
+          </Loading>
+        ) : (
+          <HashRouter history={history}>
+            <RouterWrapper>
+              <Route exact={true} path="/" component={Library} />
+              <Route exact={true} path="/users" component={Lobby} />
+              <Route exact={true} path="/book/:id" component={Book} />
+              <Route exact={true} path="/user/:id" component={User} />
+            </RouterWrapper>
+          </HashRouter>
+        )}
       </Layout>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const { error } = state.getBooks;
+  const { error, loading } = state.getItems;
   return {
-    error
+    error,
+    loading
   }
 }
 
